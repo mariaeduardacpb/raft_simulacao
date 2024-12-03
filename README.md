@@ -40,3 +40,33 @@ Este projeto é uma simulação do algoritmo de consenso **Raft** utilizando `th
    ```bash
    git clone https://github.com/seu-usuario/raft-threading-simulation.git
    cd raft-threading-simulation
+
+## **Exemplo de Logs**
+Durante a execução, o programa exibe logs que mostram o comportamento dos nós. Aqui estão exemplos de diferentes situações:
+
+1. **Timeout e Eleição**:
+   - Quando um seguidor não recebe heartbeats do líder, ele inicia uma eleição.
+   ```plaintext
+   Nodo 0: tempo expirado, iniciando eleição.
+   Nodo 0: iniciou eleição no termo 1
+   Nodo 1: votou para 0.
+   Nodo 2: votou para 0.
+   Nodo 0: eleito líder no termo 1
+   
+2. **Heartbeats**:
+   - O líder envia heartbeats para os seguidores, garantindo que eles reconheçam sua liderança.
+   ```plaintext
+   Nodo 0: enviando heartbeats como líder.
+   Nodo 1: reconheceu o líder 0.
+   Nodo 2: reconheceu o líder 0.
+   Nodo 3: reconheceu o líder 0.
+   Nodo 4: reconheceu o líder 0.
+   
+3. **Reconhecimento de Líder**:
+   - Os seguidores reconhecem o líder ao receber mensagens de heartbeat.
+   ```plaintext
+   Nodo 1: reconheceu o líder 0.
+   Nodo 2: reconheceu o líder 0.
+   Nodo 3: reconheceu o líder 0.
+   Nodo 4: reconheceu o líder 0.
+
