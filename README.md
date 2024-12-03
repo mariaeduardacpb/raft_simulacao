@@ -23,5 +23,3 @@ O algoritmo Raft é uma alternativa ao Paxos e foi projetado para ser mais simpl
    - O líder envia heartbeats periodicamente para os seguidores para mantê-los sincronizados e evitar novas eleições.
 
 ---
-
-## **Estrutura do Repositório**
