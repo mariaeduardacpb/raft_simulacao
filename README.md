@@ -1,25 +1,42 @@
-# **Raft Consensus Algorithm Simulation**
+# **Simulação do Algoritmo Raft com Threading**
 
 ## **Descrição do Projeto**
-Este projeto é uma simulação do algoritmo de consenso **Raft**, amplamente utilizado em sistemas distribuídos para garantir consistência e confiabilidade. A implementação simula um ambiente distribuído onde múltiplos nós participam do processo de consenso, incluindo eleições, replicação de logs e envio de heartbeats.
-
-O objetivo principal é demonstrar as etapas do algoritmo Raft de forma simplificada, abordando como os nós alcançam consenso em um ambiente simulado.
+Este projeto é uma simulação do algoritmo de consenso **Raft** utilizando `threading` em Python. Ele demonstra como múltiplos nós em um sistema distribuído conseguem alcançar consenso por meio de eleições de líderes, envio de heartbeats e reconhecimento de lideranças. Cada nó é executado como uma thread separada, simulando comportamento assíncrono.
 
 ---
 
-## **Algoritmo Implementado**
-### **Raft**
-O algoritmo Raft é uma alternativa ao Paxos e foi projetado para ser mais simples e fácil de entender. Ele divide o consenso em três componentes principais:
+## **Funcionamento do Algoritmo**
+### **Estados do Nó**
+1. **Seguidor**:
+   - Aguarda mensagens (heartbeats) de um líder.
+   - Caso o timeout ocorra sem mensagens, inicia uma eleição e muda para o estado de candidato.
 
-1. **Eleição de Líder**:
-   - Quando um nó não recebe mensagens do líder, ele se torna candidato e inicia uma eleição.
-   - O nó que obtiver a maioria dos votos se torna o líder.
+2. **Candidato**:
+   - Incrementa o termo atual.
+   - Solicita votos dos outros nós.
+   - Se obtiver a maioria, torna-se líder. Caso contrário, volta a ser seguidor.
 
-2. **Replicação de Logs**:
-   - O líder recebe comandos dos clientes e os adiciona ao log.
-   - O líder replica o log para os seguidores.
-
-3. **Envio de Heartbeats**:
-   - O líder envia heartbeats periodicamente para os seguidores para mantê-los sincronizados e evitar novas eleições.
+3. **Líder**:
+   - Envia heartbeats periodicamente para os seguidores, confirmando sua liderança.
 
 ---
+
+## **Estrutura do Código**
+- **`Nodo`**: Classe que representa um nó em um cluster.
+  - Implementa os três estados (`seguidor`, `candidato`, `líder`).
+  - Gerencia eleições, heartbeats e votação.
+- **`main`**: Configura um cluster de nós e inicia as threads correspondentes.
+
+---
+
+## **Requisitos**
+- **Python**: Versão 3.8 ou superior.
+- **Bibliotecas**: Apenas bibliotecas padrão do Python (`threading`, `time`, `random`).
+
+---
+
+## **Como Executar**
+1. **Clone o Repositório**:
+   ```bash
+   git clone https://github.com/seu-usuario/raft-threading-simulation.git
+   cd raft-threading-simulation
